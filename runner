@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+###run this file every minute, it updates the cron schedule   
+
+thisPath=$(realpath "${BASH_SOURCE:-$0}") #getting the abs path to where this file is stored
+DIR_PATH=$(dirname $thisPath) #getting the dir to where this project is stored
+
+mainPath=$DIR_PATH"/main"
+
+cronTiming=$(curl https://raw.githubusercontent.com/dylanfranks3/changeDesktopPicture/main/cron.txt) #get the schedule
+
+#write out current crontab
+crontab -l > mycron
+crontab -r
+
+#remove the pre-existing schedule
+sed -i '' '/main/d' mycron 
+#echo new cron into cron file
+echo "$cronTiming" $mainPath >> mycron
+#install new cron file
+
+crontab mycron
+rm mycron
+
+

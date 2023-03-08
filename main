@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#file that grabs the image and updates background
+
+thisPath=$(realpath "${BASH_SOURCE:-$0}") #getting the abs path to where this file is stored
+DIR_PATH=$(dirname $thisPath) #getting the dir to where this project is stored
+fileLocation=$DIR_PATH/imgs/new.jpeg
+
+curl -LJ 'https://pbs.twimg.com/media/FqnIxznWwAIdup1?format=jpg&name=medium' > $fileLocation
+
+func="tell application \"Finder\" to set desktop picture to POSIX file location" #osascript command
+
+osascript -e  "${func/location/"$fileLocation"}" && killall Dock #change the dektop background and killdock to ensure update
+
+
