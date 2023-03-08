@@ -23,14 +23,16 @@ Finally a text file which can be retireived by a Curl request, with only the cro
 ## **Installation**
 
 1. Clone repo
+
+   
+2. In main file, edit the curl url to the desired url of the image that you'd like displayed
+3. In runner file, edit the curl url to the desired url where the cron schedule is stored
 2. ```shell
    cd thisRepo #change directory to location of repo
    chmod u+x runner main #add privlidges to these files
    crontab -e #edit crontab
    ```
-3. In main, edit the curl url to the desired url of the image that you'd like displayed
-4. In runner, edit the curl url to the desired url where the cron schedule is stored
-5. Add this to your crontab:
+5. Add this to your crontab, save and quit:
     ```shell
    * * * * * path/to/repo/runner
    ```
